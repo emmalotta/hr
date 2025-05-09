@@ -8,9 +8,20 @@ import TableHeader from '@/components/ui/table/TableHeader.vue';
 import TableRow from '@/components/ui/table/TableRow.vue';
 import AppLayout from '@/layouts/AppLayout.vue';
 import { BreadcrumbItem } from '@/types';
-import { Link, PenSquare, Trash } from 'lucide-vue-next';
-import { router } from '@inertiajs/vue3';
+import { PenSquare, Trash } from 'lucide-vue-next';
+import { router, Link } from '@inertiajs/vue3';
 import { ref } from 'vue';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from '@/components/ui/alert-dialog'
 
 defineProps(["posts"]);
 
@@ -31,6 +42,7 @@ const deletePost = () => {
     });
 };
 
+
 </script>
 
 <template>
@@ -38,7 +50,10 @@ const deletePost = () => {
         <div class="mx-auto my-12 w-full max-w-screen-lg">
             <div class="flex justify-between">
                 <h1 class="text-2xl font-semibold tracking-wide">Posts</h1>
-                <Button>Add New</Button>
+                <Button :as="Link" :href="route('posts.create')" variant="outline" class="bg-green-500 text-white hover:bg-green-600">
+                    Add New
+                </Button>
+                
             </div>
 
             <Table>
@@ -73,23 +88,20 @@ const deletePost = () => {
             </Table>
         </div>
 
-          <AlertDialog>
-            <AlertDialogTrigger :open="!!postToDelete">
-              <AlertDialogContent>
+         <AlertDialog :open="!!postToDelete">
+            <AlertDialogContent>
                 <AlertDialogHeader>
-                  <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-                  <AlertDialogDescription>
-                    This action cannot be undone. This will permanently delete your account
-                    and remove your data from our servers.
-                  </AlertDialogDescription>
+                    <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                    <AlertDialogDescription>
+                        This action cannot be undone. This will permanently delete your account and remove your data from our servers.
+                    </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
-                  <AlertDialogCancel @click="postToDelete = undefined"> Cancel</AlertDialogCancel>
-                  <AlertDialogAction @click="deletePost">Continue</AlertDialogAction>
+                    <AlertDialogCancel @click="postToDelete = undefined">Cancel</AlertDialogCancel>
+                    <AlertDialogAction @click="deletePost">Continue</AlertDialogAction>
                 </AlertDialogFooter>
-              </AlertDialogContent>
-            </AlertDialogTrigger>
-          </AlertDialog>
+            </AlertDialogContent>
+        </AlertDialog>
     </AppLayout>
     
 </template>
