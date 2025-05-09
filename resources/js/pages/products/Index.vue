@@ -18,6 +18,10 @@ const clear = () => {
     router.post(route('cart.clear'));
 }
 
+const formatCurrency = (amount: number) => {
+    return new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR" }).format(amount);
+};
+
 </script>
 <template>
     <AppLayout :breadcrumbs="[]">
@@ -48,7 +52,7 @@ const clear = () => {
                     <div class="flex-1"> 
                         <h2 class="mb-2 mt-4 text-lg font-semibold text-gray-100">{{ product.name }}</h2>
                         <p class="mb-4 text-gray-200">{{ product.description }}</p>
-                        <p class="font-bold text-gray-400">Price: ${{ product.price }}</p>
+                        <p class="font-bold text-gray-400">Price: ${{ formatCurrency(product.price) }}</p>
                     </div>
                     <Button class="mt-2 w-full" @click="addToCart(product)">Add to cart</Button>
                 </Card>
