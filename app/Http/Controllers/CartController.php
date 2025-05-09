@@ -17,24 +17,18 @@ class CartController extends Controller
         if (data_get($cart, $product->id)) {
             $cart[$product->id]['quantity'] += 1;
         } else {
-            $cart[$product->id] =
-                [
-                    'name' => $product->name,
-                    'price' => $product->price,
-                    'quantity' => 1,
-                ];
+            $cart[$product->id] = [
+                'name' => $product->name,
+                'price' => $product->price,
+                "image" => $product->image,
+                "description" => $product->description,
+                'quantity' => 1,
+
+            ];
         }
 
         session()->put('cart', $cart);
 
-        $cart[$product->id] = [
-            'name' => $product->name,
-            'price' => $product->price,
-            "image" => $product->image,
-            "description" => $product->description,
-            'quantity' => 1,
-
-        ];
 
         return redirect()->back()->with('success', 'Product added to cart');
     }
