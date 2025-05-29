@@ -156,6 +156,7 @@ function deleteMarker(id) {
     <AppLayout :breadcrumbs="breadcrumbs">
         <div class="flex h-full flex-1 flex-col gap-4 rounded-xl p-4">
             <div class="grid auto-rows-min gap-4 md:grid-cols-3">
+                
                 <Card>
                     <CardHeader class="flex h-16 flex-row items-center justify-between space-y-0 pb-2">
                         <div>
@@ -171,21 +172,61 @@ function deleteMarker(id) {
                         <p class="text-xs text-muted-foreground">{{ weather.wind.speed }} m/s ( {{ weather.weather[0].description }} )</p>
                     </CardContent>
                 </Card>
-                <Card>
-                    <CardHeader>
-                        <CardTitle>Card Title</CardTitle>
-                        <CardDescription>Card Description</CardDescription>
+
+                <Card
+                    @click="router.visit('/posts')"
+                    class="cursor-pointer hover:shadow-xl transition-shadow group"
+                >
+                    <CardHeader class="flex flex-row items-center gap-3 pb-2">
+                        <div class="flex items-center justify-center h-10 w-10 rounded-full bg-gray-100 dark:bg-gray-800 group-hover:bg-gray-200 transition">
+                            <svg class="h-6 w-6 text-gray-600 dark:text-gray-300 group-hover:text-gray-800" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 21H5a2 2 0 01-2-2V7a2 2 0 012-2h4l2-2 2 2h4a2 2 0 012 2v12a2 2 0 01-2 2z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <CardTitle class="text-lg font-semibold text-gray-600 dark:text-gray-300">Posts</CardTitle>
+                            <CardDescription class="text-sm text-gray-500 dark:text-gray-400">View and manage all posts</CardDescription>
+                        </div>
                     </CardHeader>
-                    <CardContent> Card Content </CardContent>
-                    <CardFooter> Card Footer </CardFooter>
+                    <CardContent class="pt-2 pb-4 text-gray-700 dark:text-gray-200">
+                        Go to the Posts page to see all posts.
+                    </CardContent>
+                    <CardFooter>
+                        <span class="inline-flex items-center gap-1 text-gray-600 dark:text-gray-300 font-medium transition">
+                            Go to Posts
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </span>
+                    </CardFooter>
                 </Card>
-                <Card>
-                    <CardHeader>
-                        <CardTitle>Card Title</CardTitle>
-                        <CardDescription>Card Description</CardDescription>
+
+                <Card
+                    @click="router.visit('/products')"
+                    class="cursor-pointer hover:shadow-xl transition-shadow group"
+                >
+                    <CardHeader class="flex flex-row items-center gap-3 pb-2">
+                        <div class="flex items-center justify-center h-10 w-10 rounded-full bg-gray-100 dark:bg-gray-800 group-hover:bg-gray-200 transition">
+                            <svg class="h-6 w-6 text-gray-600 dark:text-gray-300 group-hover:text-gray-800" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 7h18M3 12h18M3 17h18"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <CardTitle class="text-lg font-semibold text-gray-600 dark:text-gray-300">Products</CardTitle>
+                            <CardDescription class="text-sm text-gray-500 dark:text-gray-400">View all products</CardDescription>
+                        </div>
                     </CardHeader>
-                    <CardContent> Card Content </CardContent>
-                    <CardFooter> Card Footer </CardFooter>
+                    <CardContent class="pt-2 pb-4 text-gray-700 dark:text-gray-200">
+                        Go to the Products page to see all products.
+                    </CardContent>
+                    <CardFooter>
+                        <span class="inline-flex items-center gap-1 text-gray-600 dark:text-gray-300 font-medium transition">
+                            Go to Products
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </span>
+                    </CardFooter>
                 </Card>
             </div>
             <div
