@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MarkerController;
@@ -100,6 +101,24 @@ Route::get("display-subjects", function () {
         'customFields' => data_get($datasets, request('type') . '.custom_fields', ['ranking', 'price']),
     ]);
 });
+
+
+
+
+Route::post('/checkout', [CheckoutController::class, 'checkout']);
+
+
+Route::get('/checkout/success', function () {
+    session()->forget('cart');
+    return Inertia::render('CheckoutSuccess');
+})->name('checkout.success');
+
+Route::get('/checkout/cancel', function () {
+    return Inertia::render('CheckoutCancel');
+})->name('checkout.cancel');
+
+
+
 
 
 require __DIR__ . '/settings.php';
