@@ -82,27 +82,27 @@ const formatCurrency = (amount: number) => {
               :alt="item.title"
               class="object-contain h-full max-h-64"
             />
-            <div v-else class="text-gray-400 dark:text-gray-500">No Image</div>
+            <div v-else class="text-gray-700 dark:text-gray-400">No Image</div>
           </div>
           <!-- Content Section -->
           <div class="flex-1 flex flex-col">
-            <h2 class="mb-2 mt-2 text-lg font-semibold text-gray-100 truncate">
+            <h2 class="mb-2 mt-2 text-lg font-semibold text-gray-700 dark:text-gray-400 truncate">
               {{ item.title }}
             </h2>
-            <p class="mb-4 text-gray-200">
+            <p class="mb-4 text-gray-700 dark:text-gray-400">
               {{ item.description }}
             </p>
             <!-- Custom Fields -->
             <div class="mb-2 space-y-1 text-sm">
               <p v-if="customFields[0]" class="font-semibold text-blue-400">
                 {{ customFields[0] }}:
-                <span class="font-normal text-gray-100">
+                <span class="font-normal text-gray-700 dark:text-gray-400">
                   {{ item[customFields[0]] }}
                 </span>
               </p>
               <p v-if="customFields[1]" class="font-semibold text-blue-400">
                 {{ customFields[1] }}:
-                <span class="font-normal text-gray-400">
+                <span class="font-normal text-gray-700 dark:text-gray-400">
                   {{ formatCurrency(item.price) }}
                 </span>
               </p>
