@@ -18,19 +18,16 @@ class MarkerController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        
-    }
+    public function create() {}
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        
+
         Marker::create([
-           
+
             'name' => $request->title,
             'description' => $request->description,
             'latitude' => $request->latitude,
@@ -42,12 +39,12 @@ class MarkerController extends Controller
             // 'latitude' => 0.0,
             // 'longitude' => 0.0,
         ]);
-        
+
         //   Post::create($request->validate([
         //     'title' => 'required|max:255',
         //     'description' => 'required',
         // ]));
-            return redirect()-> to(route('markers.index'));
+        return redirect()->to(route('markers.index'));
         // //peale postitamist viib avalehele
         // return redirect()-> to(route('posts.index'));
     }
@@ -55,10 +52,7 @@ class MarkerController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Marker $marker)
-    {
-         
-    }
+    public function show(Marker $marker) {}
 
     /**
      * Show the form for editing the specified resource.
@@ -73,7 +67,21 @@ class MarkerController extends Controller
      */
     public function update(Request $request, Marker $marker)
     {
-        //
+        $validated = $request->validate([
+            'title' => 'required|max:255',
+            'description' => 'required',
+            'latitude' => 'required|numeric',
+            'longitude' => 'required|numeric',
+        ]);
+
+        $marker->update([
+            'name' => $validated['title'],
+            'description' => $validated['description'],
+            'latitude' => $validated['latitude'],
+            'longitude' => $validated['longitude'],
+        ]);
+
+        return redirect()->to(route('markers.index'));
     }
 
     /**
@@ -81,6 +89,7 @@ class MarkerController extends Controller
      */
     public function destroy(Marker $marker)
     {
-        //
+        $marker->delete();
+        return redirect()->back();
     }
 }

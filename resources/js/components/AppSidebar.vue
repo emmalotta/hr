@@ -26,6 +26,17 @@ const mainNavItems: NavItem[] = [
         href: '/products',
         icon: Box,
     },
+    {
+        title: 'API',
+        href: '/display-subjects',
+        icon: Signpost,
+    },
+
+    {
+        title: 'Settings',
+        href: '/settings',
+        icon: BookOpen,
+    },
 
 ];
 

@@ -4,22 +4,26 @@ import Textarea from '@/components/ui/textarea/Textarea.vue';
 import AppLayout from '@/layouts/AppLayout.vue';
 import { BreadcrumbItem } from '@/types';
 import { useForm } from '@inertiajs/vue3';
+import { router } from '@inertiajs/vue3';
+import { Trash } from 'lucide-vue-next';
+import { ref } from 'vue';
 
-const props = defineProps(['post'])
+const props = defineProps(['post']);
+const postToDelete = ref<number|null>(null);
+
+const deleteComment = (id: number) => {
+    router.delete(route('comments.destroy', id), {
+        preserveScroll: true,
+    });
+};
 
 const breadcrumbs: BreadcrumbItem[] = [
-    {
-        title: 'Show post',
-        href: '/posts/show',
-    },
+    { title: 'Show post', href: '/posts/show' },
 ];
 
 const form = useForm({
     comment: '',
-
 });
-
-
 
 const submit = () => {
     form.post(route("comments.store", props.post), {
@@ -27,21 +31,18 @@ const submit = () => {
         onSuccess:() => {
             form.reset();
         },
-
     });
 };
-
 </script>
 
 <template>
     <AppLayout :breadcrumbs="breadcrumbs">
         <div class="my-12 mx-auto w-full max-w-2xl">
-           <div>
-             <h1 class="text-2xl font-semibold tracking wide">{{ post.title }}</h1>
-             <p class="">{{ post.description }}</p>
-            <!-- {{ post }} -->
-           </div>
-           <div>
+            <div>
+                <h1 class="text-2xl font-semibold tracking wide">{{ post.title }}</h1>
+                <p class="">{{ post.description }}</p>
+            </div>
+            <div>
                 <form @submit.prevent="submit">
                     <div class="relative">
                         <Textarea v-model="form.comment" class="h-full w-full"></Textarea>
@@ -67,6 +68,16 @@ const submit = () => {
                                 <div class="flex justify-between items-center">
                                     <p class="font-medium text-white">{{ comment.user.name }}</p>
                                     <p class="text-sm text-gray-500">{{ comment.created_at_for_humans }}</p>
+                                    <!-- Only show delete button if user owns the comment -->
+                                    <Button
+                                        v-if="$page.props.auth.user && comment.user_id === $page.props.auth.user.id"
+                                        @click="deleteComment(comment.id)"
+                                        variant="destructive"
+                                        size="icon"
+                                        title="Delete"
+                                    >
+                                        <Trash class="size-4" />
+                                    </Button>
                                 </div>
                                 <p class="text-gray-600 mt-1">{{ comment.comment }}</p>
                             </div>
@@ -74,7 +85,6 @@ const submit = () => {
                     </li>
                 </ul>
             </div>
-            <!-- <pre>{{ post.comments }}</pre> -->
         </div>
     </AppLayout>
 </template>

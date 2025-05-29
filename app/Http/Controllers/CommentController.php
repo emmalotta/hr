@@ -63,6 +63,11 @@ class CommentController extends Controller
      */
     public function destroy(Comment $comment)
     {
-        //
+        // Check if the authenticated user is the owner of the comment
+        if ($comment->user_id !== auth()->id()) {
+            return redirect()->back()->with('error', 'You are not authorized to delete this comment.');
+        }
+        $comment->delete();
+        return redirect()->back();
     }
 }
