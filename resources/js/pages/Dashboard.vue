@@ -158,7 +158,12 @@ function deleteMarker(id) {
             <div class="grid auto-rows-min gap-4 md:grid-cols-3">
                 <Card>
                     <CardHeader class="flex h-16 flex-row items-center justify-between space-y-0 pb-2">
-                        <CardTitle class="text-sm font-medium"> Weather </CardTitle>
+                        <div>
+                            <CardTitle class="text-sm font-medium">Weather</CardTitle>
+                            <div class="text-lg text-gray-600 dark:text-gray-300 font-bold pt-2">
+                                {{ weather.name }}
+                            </div>
+                        </div>
                         <img :src="'http://openweathermap.org/img/wn/' + weather.weather[0].icon + '@2x.png'" alt="Weather icon" class="h-12 w-12" />
                     </CardHeader>
                     <CardContent>
