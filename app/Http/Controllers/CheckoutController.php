@@ -10,6 +10,7 @@ class CheckoutController extends Controller
 {
     public function checkout(Request $request)
     {
+
         \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
 
         $cart = $request->items ?? [];
@@ -22,11 +23,12 @@ class CheckoutController extends Controller
                     'product_data' => [
                         'name' => $item['name'],
                     ],
-                    'unit_amount' => $item['price'] * 100, // in cents
+                    'unit_amount' => $item['price'] * 100,
                 ],
                 'quantity' => $item['quantity'],
             ];
         }
+
 
         $session = Session::create([
             'payment_method_types' => ['card'],

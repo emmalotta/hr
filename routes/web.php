@@ -104,7 +104,6 @@ Route::get("display-subjects", function () {
 
 
 
-
 Route::post('/checkout', [CheckoutController::class, 'checkout']);
 
 

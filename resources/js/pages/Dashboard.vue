@@ -76,10 +76,7 @@ for (let marker of props.markers) {
             color: '#000257',
             width: 40,
             height: 80,
-            // popup: {
-            //     text: marker.title,
-            //     text: marker.description,
-            // },
+            anchor: 'bottom', // <-- Add this line
         })
         .setLngLat([marker.longitude, marker.latitude])
         .addTo(map);
