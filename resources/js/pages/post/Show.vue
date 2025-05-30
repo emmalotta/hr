@@ -66,7 +66,7 @@ const submit = () => {
                             </div>
                             <div class="flex-1">
                                 <div class="flex justify-between items-center">
-                                    <p class="font-medium text-white">{{ comment.user.name }}</p>
+                                    <p class="font-medium dark:text-white text-black">{{ comment.user.name }}</p>
                                     <p class="text-sm text-gray-500">{{ comment.created_at_for_humans }}</p>
                                     <!-- Only show delete button if user owns the comment -->
                                     <Button
